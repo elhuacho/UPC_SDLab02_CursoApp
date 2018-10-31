@@ -2,6 +2,7 @@ package com.curso.app;
 
 import com.curso.app.entidades.Producto;
 import com.curso.app.repositorio.ProductoRepositorio;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +31,25 @@ public class AppApplicationTests {
 		producto.setDescripcion("Papel Carta A4");
 		producto.setPrecio(12.00);
 		Producto p = productoRepositorio.save(producto);
+	}
 
+	@Test
+	public void probarListado() {
+		Iterable<Producto> productos = productoRepositorio.findAll();
+		Assert.assertNotNull(productos);
+	}
 
+	@Test
+	public void probarEntidad() {
+		Producto p = productoRepositorio.findById(2L).get();
+		Assert.assertNotNull(p);
+	}
+
+	@Test
+	public void probarBorrar() {
+		Producto producto = new Producto();
+		producto.setCodigo(3L);
+		productoRepositorio.delete(producto);
 	}
 
 }
