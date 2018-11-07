@@ -5,6 +5,8 @@ import com.curso.app.repositorio.ProductoRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class Negocio {
     @Autowired
@@ -12,5 +14,9 @@ public class Negocio {
 
     public Producto crear(Producto producto) {
         return productoRepositorio.save(producto);
+    }
+
+    public List<Producto> obtenerCatalogo() {
+        return (List<Producto>) productoRepositorio.findAll();
     }
 }
